@@ -91,7 +91,67 @@ int main()
 
 7、左值引用，如int & i=j不能绑定右值，但是const引用，如const int &i =9是合法的，右值引用只能绑定右值，如int &&i=9
 
-8、
+8、initializer_list可用来接收同一类型的可变数量的参数，它同vector的不同之处在于它里面的值是常量，不能被改变，用法：void func（initializer_list<string> param）{}
+int main()
+{
+	func（{"aa","bb","cc"});
+}
+参数以花括号的形式传入
+
+9、shrink_to_fit成员函数 仅适用于vector、string、deque
+表示将capacity减少为与size相同的大小
+
+10、lambda表达式不能有默认参数，可以忽略参数列表和返回类型，但必须永远包含捕获列表和函数体 []()mutable->returnType{}
+隐式和显示捕获混用时，第一个元素必须是&或=，后面是需要显示捕获的变量
+如果一个lambda体包含出return外的任何语句，编译器假定其返回void，必须显式指定返回类型
+值捕获lambda也不会改变该捕获变量的值，若想改变则需加上mutable
+
+11、std::bind()会拷贝参数，但有些参数，如流对象不能拷贝，必须用引用，此事须加上ref，如auto f=std::bind(func, std::res(os),a,_1)
+
+12、shared_ptr  头文件"memory.h"
+shared_prt<string> ptr = make_sharee<string> p("sss"); 初始化
+引用计数为0时，释放资源 ptr.use_count() == 0
+return一个shared_ptr时，产生了拷贝构造的复制，引用计数加一，未被释放，所谓的return时复制的对象是在调用函数后产生的临时值
+
+13、［拷贝构造函数的调用时机］
+
+　1、对象以值传递的方式传入函数参数
+
+　2、对象以值传递的方式从函数返回
+
+　3、对象需要通过另外一个对象进行初始化
+
+14、
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
